@@ -9,7 +9,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-// Route::post('/coordinatorAdd', [AddCoordinator::class, 'storeCoordinator']);
+Route::post('/coordinatorAdd', [AddCoordinator::class, 'storeCoordinator']);
 Route::post('/coordinator/login', [CoordinatorController::class, 'loginCoordinator']);
 
 

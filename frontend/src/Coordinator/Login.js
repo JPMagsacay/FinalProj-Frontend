@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate for redirecting
+import { useNavigate } from 'react-router-dom';
+import '../css/Login.css';  // Import the CSS file
 
 function Login() {
   const [coordinatorId, setCoordinatorId] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();  // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,12 +21,8 @@ function Login() {
       setMessage(response.data.message);
       console.log('Coordinator data:', response.data.coordinator);
 
-      // Store the coordinator data if needed
       localStorage.setItem('coordinator', JSON.stringify(response.data.coordinator));
-
-
-      // Redirect to the dashboard on successful login
-      navigate('/dashboard');  // Redirect to /dashboard
+      navigate('/dashboard');
 
     } catch (error) {
       console.error('Login failed:', error.response?.data || error.message);
@@ -34,7 +31,14 @@ function Login() {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
+    <div className="login-container">
+      {/* Add your photo here */}
+      <img 
+        src="/img/occlogo.png" 
+        alt="Opol Community College Logo"
+        className="login-logo"
+      />
+
       <h2>Coordinator Login</h2>
       <form onSubmit={handleLogin}>
         <input
@@ -43,7 +47,6 @@ function Login() {
           value={coordinatorId}
           onChange={(e) => setCoordinatorId(e.target.value)}
           required
-          style={{ display: 'block', width: '100%', marginBottom: '10px' }}
         />
         <input
           type="password"
@@ -51,13 +54,12 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          style={{ display: 'block', width: '100%', marginBottom: '10px' }}
         />
-        <button type="submit" style={{ width: '100%' }}>Login</button>
+        <button type="submit">Login</button>
       </form>
 
       {message && (
-        <p style={{ marginTop: '20px', color: 'red' }}>{message}</p>
+        <p>{message}</p>
       )}
     </div>
   );
