@@ -15,14 +15,14 @@
     flex: 1;
     padding: 40px;
     background-color: #ffffff; /* White background */
-    color: #1e3a8a; /* Dark blue text */
+    color: #000080; /* Dark blue text */
     overflow-y: auto; /* Allows scrolling if content grows */
   }
   
   /* Heading */
   .dashboard-content h1 {
     font-size: 32px;
-    color: #2563eb; /* Bright blue */
+    color: #000080; /* Bright blue */
     margin-bottom: 20px;
   }
   

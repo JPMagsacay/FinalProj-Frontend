@@ -20,7 +20,7 @@ body, html {
   }
   
   .login-container h2 {
-    color: #1e3a8a;
+    color: #1E90FF;
     margin-bottom: 20px;
     font-size: 24px;
   }
@@ -47,14 +47,14 @@ body, html {
   }
   
   .login-container input:focus {
-    border-color: #3b82f6;
+    border-color: #1E90FF;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
     outline: none;
   }
   
   .login-container button {
     padding: 12px;
-    background-color: #2563eb;
+    background-color: #1E90FF;
     color: white;
     font-size: 16px;
     border: none;
@@ -64,13 +64,13 @@ body, html {
   }
   
   .login-container button:hover {
-    background-color: #1e40af;
+    background-color: #1E90FF;
     transform: translateY(-2px);
   }
   
   .login-container p {
     margin-top: 15px;
-    color: #ef4444;
+    color: #930606;
     font-size: 14px;
   }
   

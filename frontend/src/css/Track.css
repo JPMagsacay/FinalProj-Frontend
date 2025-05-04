@@ -1,0 +1,206 @@
+/* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background-color: #eef1f7;
+}
+
+.dashboard-container {
+  display: flex;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 30px;
+  background-color: #f7f9fc;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 25px;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px 24px;
+  background-color: #4169E1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #3452b3;
+  transform: translateY(-2px);
+}
+
+button:focus {
+  outline: none;
+}
+
+button:disabled {
+  background-color: #c5cae9;
+  cursor: not-allowed;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+table th, table td {
+  text-align: left;
+  padding: 18px;
+  font-size: 1rem;
+}
+
+table th {
+  background-color: #4169E1;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background-color: #f4f6f9;
+}
+
+table tr:hover {
+  background-color: #e3e8f3;
+  cursor: pointer;
+}
+
+table td button {
+  padding: 8px 16px;
+  background-color: #4169E1;
+  border-radius: 6px;
+  color: white;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+table td button:hover {
+  background-color: #3452b3;
+}
+
+table td button:focus {
+  outline: none;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+  border-color: #4169E1;
+  outline: none;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  background-color: #4169E1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-right: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content button:hover {
+  background-color: #3452b3;
+  transform: translateY(-2px);
+}
+
+.modal-content button:focus {
+  outline: none;
+}
+
+/* Track Management Specific Styles */
+.add-track-btn {
+  margin-bottom: 10px;
+}
+
+.edit-btn {
+  padding: 5px 10px;
+}
+
+.delete-btn {
+  padding: 5px 10px;
+  margin-left: 10px;
+  background-color: rgb(222, 9, 9)
+}
+
+.no-tracks {
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-content {
+    padding: 20px;
+  }
+
+  table th, table td {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .modal-content input,
+  .modal-content textarea {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}

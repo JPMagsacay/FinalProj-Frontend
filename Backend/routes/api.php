@@ -13,7 +13,10 @@ Route::post('/coordinatorAdd', [AddCoordinator::class, 'storeCoordinator']);
 Route::post('/coordinator/login', [CoordinatorController::class, 'loginCoordinator']);
 
 
-Route::post('/students', [CoordinatorController::class, 'storeStudent']);
+Route::post('/addstudents', [CoordinatorController::class, 'storeStudent']); // Add new student
+Route::get('/students', [CoordinatorController::class, 'fetchStudents']);   // Fetch all students
+Route::put('/UpdateStudent/{student_id}', action: [CoordinatorController::class, 'updateStudent']);  // Update student details
+Route::delete('/DeleteStudent/{id}', [CoordinatorController::class, 'deleteStudent']);  // Delete student
 
 Route::post('/tracks', [CoordinatorController::class, 'addTrack']);
 Route::get('/ShowTracks', [CoordinatorController::class, 'showTracks']);

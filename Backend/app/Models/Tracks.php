@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tracks extends Model
 {
     protected $table = 'track';
+    protected $primaryKey = 'track_id';
     protected $fillable = [
         'track_id',
         'track_name',

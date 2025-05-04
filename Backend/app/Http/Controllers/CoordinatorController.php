@@ -14,6 +14,32 @@ use Illuminate\Support\Facades\Hash;
 class CoordinatorController extends Controller
 {
     //==============================ADD STUDENT DETAILS AND ACCOUNT===============================
+ // Fetch all students
+    // Fetch all students
+public function fetchStudents()
+{
+    try {
+        // Retrieve all students from the database and transform status
+        $students = StudentDetails::all()->map(function ($student) {
+            $student->status = $student->status == 1 ? 'Active' : 'Inactive';
+            return $student;
+        });
+
+        // Return the students data as a JSON response
+        return response()->json([
+            'students' => $students,
+        ], 200);  // 200 OK status
+    } catch (\Exception $e) {
+        // If an error occurs, return a JSON error response
+        return response()->json([
+            'message' => 'Error fetching students.',
+            'error' => $e->getMessage(),
+        ], 500);  // 500 Internal Server Error
+    }
+}
+
+
+    // Store new student
     public function storeStudent(Request $request)
     {
         // Validate input
@@ -26,8 +52,10 @@ class CoordinatorController extends Controller
             'suffix' => 'nullable|string',
             'email' => 'required|email|unique:student_details,email',
             'Phone_number' => 'required|string',
-            'gender' => 'required|string',
+            'gender' => 'required|in:Male,Female',  // ✅ added gender validation
+            'status' => 'required|in:0,1', 
         ]);
+        
 
         DB::beginTransaction();
 
@@ -36,7 +64,7 @@ class CoordinatorController extends Controller
             $studentAcc = StudentAcc::create([
                 'student_id' => $validatedData['student_id'],
                 'password' => Hash::make($validatedData['password']),
-                'status' => '1',
+                'status' => $validatedData['status'],
             ]);
 
             //Create student details
@@ -49,7 +77,7 @@ class CoordinatorController extends Controller
                 'email' => $validatedData['email'],
                 'Phone_number' => $validatedData['Phone_number'],
                 'gender' => $validatedData['gender'],
-                'status' => '1',
+                'status' => $validatedData['status'], 
             ]);
 
             DB::commit();
@@ -60,6 +88,78 @@ class CoordinatorController extends Controller
             return response()->json(['error' => 'Failed to save student. ' . $e->getMessage()], 500);
         }
     }
+
+    // Update student details
+    public function updateStudent($student_id, Request $request)
+    {
+        try {
+            // Find the student by ID
+            $student = StudentDetails::findOrFail($student_id);
+
+            // Validate incoming data
+            $validated = $request->validate([
+                'lname' => 'required|string',
+                'fname' => 'required|string',
+                'mname' => 'nullable|string',
+                'suffix' => 'nullable|string',
+                'email' => 'required|email',
+                'Phone_number' => 'required|string',
+                'gender' => 'required|string',
+                'status' => 'required|string',
+            ]);
+
+            // Update the student's data
+            $student->update([
+                'lname' => $validated['lname'],
+                'fname' => $validated['fname'],
+                'mname' => $validated['mname'] ?? null,
+                'suffix' => $validated['suffix'] ?? null,
+                'email' => $validated['email'],
+                'Phone_number' => $validated['Phone_number'],
+                'gender' => $validated['gender'],
+                'status' => $validated['status'],
+            ]);
+
+            // Return a successful response with the updated student data
+            return response()->json([
+                'message' => 'Student updated successfully!',
+                'student' => $student,
+            ], 200); // 200 OK status
+        } catch (\Exception $e) {
+            // Handle any errors (e.g., student not found)
+            return response()->json([
+                'message' => 'Error updating student.',
+                'error' => $e->getMessage(),
+            ], 500);  // 500 Internal Server Error
+        }
+    }
+
+    // Delete a student
+    public function deleteStudent($id)
+    {
+        try {
+            // Find the student by ID
+            $student = StudentDetails::findOrFail($id);
+
+            // Delete the student
+            $student->delete();
+
+            // Return a success message
+            return response()->json([
+                'message' => 'Student deleted successfully!',
+            ], 200);  // 200 OK status
+        } catch (\Exception $e) {
+            // If the student is not found or an error occurs
+            return response()->json([
+                'message' => 'Error deleting student.',
+                'error' => $e->getMessage(),
+            ], 500);  // 500 Internal Server Error
+        }
+    }
+
+    
+
+
     //==============================END ADD STUDENT DETAILS AND ACCOUNT===============================
 
     //==============================ADD TRACK===============================
